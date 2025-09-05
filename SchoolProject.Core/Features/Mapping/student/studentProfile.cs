@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediatR;
-using SchoolProject.Core.bases;
+using AutoMapper;
 using SchoolProject.Core.Features.student.Queries.Results;
 using SchoolProject.Data.Entities;
 
-namespace SchoolProject.Core.Features.student.Queries.models
+namespace SchoolProject.Core.Features.Mapping.student
 {
-    public class GetStudentListQuery:IRequest<Response<List<getStudentQueryListResponse>>>
+    public partial class studentProfile : Profile
     {
-
+        public studentProfile()
+        {
+            getStudentListMapping();
+        }
     }
 }

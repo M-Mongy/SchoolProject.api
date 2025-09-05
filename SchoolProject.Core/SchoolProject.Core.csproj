@@ -13,13 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Mapping\student\commandMapping\" />
     <Folder Include="Features\student\Commands\Handler\" />
     <Folder Include="Features\student\Commands\models\" />
     <Folder Include="Features\student\Commands\validatiors\" />
-    <Folder Include="Features\student\Queries\validatiors\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
   </ItemGroup>
 
