@@ -13,12 +13,14 @@ using SchoolProject.Service.Absract;
 
 namespace SchoolProject.Core.Features.student.Queries.Handler
 {
-    public class studentHandler :ResponseHandler,IRequestHandler<GetStudentListQuery,Response<List<getStudentQueryListResponse>>>
+    public class studentQueryHandler :ResponseHandler,
+        IRequestHandler<GetStudentListQuery,Response<List<getStudentQueryListResponse>>>,
+        IRequestHandler<GetStudentByIdQuery,Response<getSingleStudentResponse>>
     {
         private readonly IstudentService _service;
         private readonly IMapper _mapper;
 
-        public studentHandler(IstudentService service, IMapper mapper)
+        public studentQueryHandler(IstudentService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -29,6 +31,15 @@ namespace SchoolProject.Core.Features.student.Queries.Handler
             var response= await _service.GetStudentListAsync();
            var responseListMapper=_mapper.Map<List<getStudentQueryListResponse>>(response);
             return Success(responseListMapper);
+        }
+
+        async Task<Response<getSingleStudentResponse>> IRequestHandler<GetStudentByIdQuery, Response<getSingleStudentResponse>>.Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
+        {
+            var student = await _service.GetStudentByIdAsync(request.Id);
+            if (student == null) return NotFound<getSingleStudentResponse>("Object not found");
+            var result = _mapper.Map<getSingleStudentResponse>(student);
+            return Success(result);
+
         }
     }
 }

@@ -21,5 +21,11 @@ namespace SchoolProject.api.Controllers
             var response = await _mediator.Send(new GetStudentListQuery());
             return Ok(response);
         }
+        [HttpGet("/student/{id}")]
+        public async Task<IActionResult> GetStudentById([FromRoute] int  id)
+        {
+            var response = await _mediator.Send(new GetStudentByIdQuery(id));
+            return Ok(response);
+        }
     }
 }
