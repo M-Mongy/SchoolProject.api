@@ -7,23 +7,24 @@ using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Infrastructure.Data;
+using SchoolProject.Infrastructure.InfraStructureBsaes;
 
 namespace SchoolProject.Infrastructure.Repositories
 {
-    public class studentRepository : IstudentRepository
+    public class studentRepository : GenericRepositoryAsync<Student>, IstudentRepository
     {
-        private readonly ApplicationDBContext _dbContext;
+        private readonly DbSet<Student> _students;
         
-        public studentRepository(ApplicationDBContext dBContext)
+        public studentRepository(ApplicationDBContext dBContext):base(dBContext) 
         {
-          _dbContext = dBContext;
+            _students = dBContext.Set<Student>();
         }
 
         public ApplicationDBContext DBContext { get; }
 
         public async Task<List<Student>> GetStudentListAsync()
         {
-          return  await _dbContext.students.Include(x=>x.Departments).ToListAsync();
+          return  await _students.Include(x=>x.Departments).ToListAsync();
         }
     }
 }
