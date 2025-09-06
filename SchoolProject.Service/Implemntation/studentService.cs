@@ -20,6 +20,20 @@ namespace SchoolProject.Service.Implemntation
             _repository = repository;
         }
 
+        public async Task<string> AddAsync(Student student)
+        {
+            var studentResult = _repository.GetTableNoTracking().Where(x => x.Name.Equals(student.Name)).FirstOrDefault();
+            if (studentResult != null) {
+                return "already Exist";
+            }
+            if (student.StudID == null)
+            {
+
+            }
+            _repository.AddAsync(student);
+            return "Added Successfully ";
+        }
+
         public Task<Student> GetStudentByIdAsync(int id)
         {
             var student = _repository.GetTableNoTracking().Include(x => x.Departments)

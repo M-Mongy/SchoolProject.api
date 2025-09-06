@@ -13,9 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Mapping\student\commandMapping\" />
-    <Folder Include="Features\student\Commands\Handler\" />
-    <Folder Include="Features\student\Commands\models\" />
     <Folder Include="Features\student\Commands\validatiors\" />
   </ItemGroup>
 
