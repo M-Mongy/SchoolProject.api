@@ -20,6 +20,7 @@ namespace SchoolProject.Data.AppMetaData
             public const string GetByID = Prefix + SignleRoute;
             public const string Create = Prefix + "/Create";
             public const string Edit = Prefix + "/Edit";
+            public const string Delete = Prefix + SignleRoute;
         }
     }
 }

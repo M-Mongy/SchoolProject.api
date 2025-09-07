@@ -30,6 +30,12 @@ namespace SchoolProject.Service.Implemntation
             return "Added Successfully ";
         }
 
+        public async Task<string> DeleteAsync(Student student)
+        {
+            await _repository.DeleteAsync(student);
+            return "Deleted Successfully ";
+        }
+
         public async Task<string> EditAsync(Student student)
         {
             await _repository.UpdateAsync(student);
