@@ -15,7 +15,8 @@ using ProjectResponse = SchoolProject.Core.bases.Response<string>;
 namespace SchoolProject.Core.Features.student.Commands.Handler
 {
     public class AddStudentCommandHandler : ResponseHandler,
-                                            IRequestHandler<AddStudentCommand, ProjectResponse>
+                                            IRequestHandler<AddStudentCommand, ProjectResponse>,
+                                            IRequestHandler<EditStudentCommand, ProjectResponse>
     {
         private readonly IstudentService _service;
         private readonly IMapper _mapper;
@@ -39,6 +40,24 @@ namespace SchoolProject.Core.Features.student.Commands.Handler
             }
 
             return Created("Student Added Successfully");
+        }
+
+        public async Task<ProjectResponse> Handle(EditStudentCommand request, CancellationToken cancellationToken)
+        {
+            var student = await _service.GetStudentByIdAsync(request.id);
+            if (student == null) return NotFound<string>("Student not found");
+   
+            var sudentmapper=_mapper.Map<Student>(request);
+
+            var result = await _service.EditAsync(sudentmapper);
+
+            if (result == "Success")
+            {
+                return Success("Student Edited Successfully");
+            }
+            else return BadRequest<string>();
+
+
         }
     }
 }

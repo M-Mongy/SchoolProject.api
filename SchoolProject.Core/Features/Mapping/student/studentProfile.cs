@@ -16,6 +16,7 @@ namespace SchoolProject.Core.Features.Mapping.student
             getStudentListMapping();
             getStudentByIdMapping();
             GetStudentListMapping();
+            EditStudentcommandMapping();
         }
     }
 }

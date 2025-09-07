@@ -37,53 +37,43 @@ namespace SchoolProject.Core.MiddleWare
                 switch (error)
                 {
                     case UnauthorizedAccessException e:
-                        // custom application error
-                        responseModel.Message = error.Message;
+                        responseModel.Message = e.Message;
                         responseModel.StatusCode = HttpStatusCode.Unauthorized;
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         break;
 
-                    case ValidationException e:
-                        // custom validation error
-                        responseModel.Message = error.Message;
+                    case System.ComponentModel.DataAnnotations.ValidationException e:
+                        responseModel.Message = e.Message;
                         responseModel.StatusCode = HttpStatusCode.UnprocessableEntity;
                         response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
                         break;
+
+                    case FluentValidation.ValidationException e:
+                        responseModel.Message = string.Join(", ", e.Errors.Select(x => x.ErrorMessage));
+                        responseModel.StatusCode = HttpStatusCode.BadRequest;
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        break;
+
                     case KeyNotFoundException e:
-                        // not found error
-                        responseModel.Message = error.Message; ;
+                        responseModel.Message = e.Message;
                         responseModel.StatusCode = HttpStatusCode.NotFound;
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
 
                     case DbUpdateException e:
-                        // can't update error
                         responseModel.Message = e.Message;
                         responseModel.StatusCode = HttpStatusCode.BadRequest;
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
-                    case Exception e:
-                        if (e.GetType().ToString() == "ApiException")
-                        {
-                            responseModel.Message += e.Message;
-                            responseModel.Message += e.InnerException == null ? "" : "\n" + e.InnerException.Message;
-                            responseModel.StatusCode = HttpStatusCode.BadRequest;
-                            response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        }
-                        responseModel.Message = e.Message;
-                        responseModel.Message += e.InnerException == null ? "" : "\n" + e.InnerException.Message;
-
-                        responseModel.StatusCode = HttpStatusCode.InternalServerError;
-                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        break;
 
                     default:
-                        // unhandled error
-                        responseModel.Message = error.Message;
+                        responseModel.Message = error.Message +
+                                                (error.InnerException == null ? "" : "\n" + error.InnerException.Message);
                         responseModel.StatusCode = HttpStatusCode.InternalServerError;
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }
+
                 var result = JsonSerializer.Serialize(responseModel);
 
                 await response.WriteAsync(result);

@@ -25,10 +25,15 @@ namespace SchoolProject.Service.Implemntation
 
             if (student.StudID == null)
             {
-
             }
             _repository.AddAsync(student);
             return "Added Successfully ";
+        }
+
+        public async Task<string> EditAsync(Student student)
+        {
+            await _repository.UpdateAsync(student);
+            return "Success";
         }
 
         public Task<Student> GetStudentByIdAsync(int id)
@@ -53,5 +58,14 @@ namespace SchoolProject.Service.Implemntation
             }
             return true;
         }
+
+        public async Task<bool> IsNameExsitExclusive(string name, int id)
+        {
+            var studentResult = await _repository.GetTableNoTracking()
+                .FirstOrDefaultAsync(x => x.Name == name && x.StudID != id);
+
+            return studentResult != null;
+        }
+
     }
 }
