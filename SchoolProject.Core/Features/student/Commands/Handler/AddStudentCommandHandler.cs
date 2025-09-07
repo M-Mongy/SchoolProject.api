@@ -14,7 +14,8 @@ using ProjectResponse = SchoolProject.Core.bases.Response<string>;
 
 namespace SchoolProject.Core.Features.student.Commands.Handler
 {
-    public class AddStudentCommandHandler : ResponseHandler, IRequestHandler<AddStudentCommand, ProjectResponse>
+    public class AddStudentCommandHandler : ResponseHandler,
+                                            IRequestHandler<AddStudentCommand, ProjectResponse>
     {
         private readonly IstudentService _service;
         private readonly IMapper _mapper;

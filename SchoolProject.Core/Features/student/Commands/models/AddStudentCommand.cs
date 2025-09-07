@@ -10,7 +10,7 @@ using SchoolProject.Core.bases;
 namespace SchoolProject.Core.Features.student.Commands.models
 {
      public class AddStudentCommand : IRequest<Response<string>>
-    {
+     {
         [Required]
         public string name { get; set; }
         [Required]
@@ -18,7 +18,5 @@ namespace SchoolProject.Core.Features.student.Commands.models
         public string phone  { get; set; }
         public int Department_id  { get; set; }
 
-
-
-    }
+     }
 }

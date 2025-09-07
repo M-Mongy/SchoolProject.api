@@ -22,10 +22,7 @@ namespace SchoolProject.Service.Implemntation
 
         public async Task<string> AddAsync(Student student)
         {
-            var studentResult = _repository.GetTableNoTracking().Where(x => x.Name.Equals(student.Name)).FirstOrDefault();
-            if (studentResult != null) {
-                return "already Exist";
-            }
+
             if (student.StudID == null)
             {
 
@@ -45,6 +42,16 @@ namespace SchoolProject.Service.Implemntation
         public async Task<List<Student>> GetStudentListAsync()
         {
             return await _repository.GetStudentListAsync();
+        }
+
+        public async Task<bool> IsNameExsit(string Name)
+        {
+            var studentResult = _repository.GetTableNoTracking().Where(x => x.Name.Equals(Name)).FirstOrDefault();
+            if (studentResult == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
