@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
 using SchoolProject.Core.Features.student.Queries.models;
 using SchoolProject.Core.Features.student.Queries.Results;
+using SchoolProject.Core.SharedResources;
 using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Entities;
 using SchoolProject.Service.Absract;
@@ -22,11 +24,14 @@ namespace SchoolProject.Core.Features.student.Queries.Handler
     {
         private readonly IstudentService _service;
         private readonly IMapper _mapper;
+        private readonly IStringLocalizer<SharedResource> _stringLocalizer;
 
-        public studentQueryHandler(IstudentService service, IMapper mapper)
+        public studentQueryHandler(IstudentService service,
+                                   IMapper mapper, IStringLocalizer<SharedResource> stringLocalizer ) :base(stringLocalizer)
         {
             _service = service;
             _mapper = mapper;
+            _stringLocalizer = stringLocalizer;
         }
 
         public async Task<Response<List<getStudentQueryListResponse>>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
@@ -38,17 +43,17 @@ namespace SchoolProject.Core.Features.student.Queries.Handler
 
         public async Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
         {
-            Expression<Func<Student, GetStudentPaginatedListResponse>> exception = e => new GetStudentPaginatedListResponse(e.StudID, e.Name,e.Address,e.Departments.DName);
+            Expression<Func<Student, GetStudentPaginatedListResponse>> exception = e => new GetStudentPaginatedListResponse(e.StudID, e.NameAr,e.Address,e.Departments.DNameAr);
             //var Querable=_service.GetStudentQueryable();
             var QuerableFilter = _service.FilterStudentPaginatedQuerable(request.orderBy,request.Search);
             var PaginatedList = await QuerableFilter.Select(exception).ToPaginatedListAsync(request.pageNumber, request.pageSize);
             return PaginatedList;
         }
 
-        async Task<Response<getSingleStudentResponse>> IRequestHandler<GetStudentByIdQuery, Response<getSingleStudentResponse>>.Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
+         public async Task<Response<getSingleStudentResponse>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
         {
             var student = await _service.GetStudentByIdAsync(request.Id);
-            if (student == null) return NotFound<getSingleStudentResponse>("Object not found");
+            if (student == null) return NotFound<getSingleStudentResponse>(_stringLocalizer[SharedResourcesKeys.NotFound]);
             var result = _mapper.Map<getSingleStudentResponse>(student);
             return Success(result);
 

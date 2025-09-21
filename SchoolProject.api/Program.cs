@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Core;
 using SchoolProject.Core.MiddleWare;
@@ -23,6 +25,30 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
 });
+
+
+#region Localization
+builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(opt =>
+{
+    opt.ResourcesPath = "";
+});
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    List<CultureInfo> supportedCultures = new List<CultureInfo>
+    {
+            new CultureInfo("en-US"),
+            new CultureInfo("de-DE"),
+            new CultureInfo("fr-FR"),
+            new CultureInfo("ar-EG")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+#endregion
 
 var app = builder.Build();
 

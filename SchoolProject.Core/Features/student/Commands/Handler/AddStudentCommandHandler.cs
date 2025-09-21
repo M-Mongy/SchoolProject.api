@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Azure;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
 using SchoolProject.Core.Features.student.Commands.models;
+using SchoolProject.Core.SharedResources;
 using SchoolProject.Data.Entities;
 using SchoolProject.Service.Absract;
 using ProjectResponse = SchoolProject.Core.bases.Response<string>;
@@ -21,12 +23,15 @@ namespace SchoolProject.Core.Features.student.Commands.Handler
     {
         private readonly IstudentService _service;
         private readonly IMapper _mapper;
+        private readonly IStringLocalizer<SharedResource> _stringLocalizer ;
 
 
-        public AddStudentCommandHandler(IstudentService service,IMapper mapper)
+        public AddStudentCommandHandler(IstudentService service,
+            IMapper mapper, IStringLocalizer<SharedResource> stringLocalizer ) : base(stringLocalizer)
         {
             _service = service;
             _mapper = mapper;
+            _stringLocalizer = stringLocalizer;
         }
 
         public async Task<ProjectResponse> Handle(AddStudentCommand request, CancellationToken cancellationToken)

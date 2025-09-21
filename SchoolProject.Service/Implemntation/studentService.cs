@@ -48,7 +48,7 @@ namespace SchoolProject.Service.Implemntation
            var FilterPaginated= _repository.GetTableNoTracking().Include(x=>x.Departments).AsQueryable();
             if (Search != null)
             {
-                FilterPaginated = FilterPaginated.Where(x => x.Name.Contains(Search) || x.Address.Contains(Search));
+                FilterPaginated = FilterPaginated.Where(x => x.NameAr.Contains(Search) || x.Address.Contains(Search));
             }
 
             switch (orderEnum)
@@ -60,10 +60,10 @@ namespace SchoolProject.Service.Implemntation
                     FilterPaginated = FilterPaginated.OrderBy(x => x.Address);
                     break;
                 case StudentOrderingEnum.Name:
-                    FilterPaginated = FilterPaginated.OrderBy(x => x.Name);
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.NameAr);
                     break;
                 case StudentOrderingEnum.DepartmentName:
-                    FilterPaginated = FilterPaginated.OrderBy(x => x.Departments.DName);
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.Departments.DNameAr);
                     break;
             }
 
@@ -91,7 +91,7 @@ namespace SchoolProject.Service.Implemntation
 
         public async Task<bool> IsNameExsit(string Name)
         {
-            var studentResult = _repository.GetTableNoTracking().Where(x => x.Name.Equals(Name)).FirstOrDefault();
+            var studentResult = _repository.GetTableNoTracking().Where(x => x.NameAr.Equals(Name)).FirstOrDefault();
             if (studentResult == null)
             {
                 return false;
@@ -102,7 +102,7 @@ namespace SchoolProject.Service.Implemntation
         public async Task<bool> IsNameExsitExclusive(string name, int id)
         {
             var studentResult = await _repository.GetTableNoTracking()
-                .FirstOrDefaultAsync(x => x.Name == name && x.StudID != id);
+                .FirstOrDefaultAsync(x => x.NameAr == name && x.StudID != id);
 
             return studentResult != null;
         }

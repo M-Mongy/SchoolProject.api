@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Core;
+using Microsoft.Extensions.Localization;
+using SchoolProject.Core.SharedResources;
 
 namespace SchoolProject.Core.bases
 {
     public class ResponseHandler
     {
-
-        public ResponseHandler()
+        private readonly IStringLocalizer<SharedResource> _stringLocalizer;
+        public ResponseHandler(IStringLocalizer<SharedResource> stringLocalizer)
         {
-
+            _stringLocalizer = stringLocalizer;
         }
         public Response<T> Deleted<T>()
         {
@@ -19,7 +22,7 @@ namespace SchoolProject.Core.bases
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Deleted Successfully"
+                Message = _stringLocalizer[SharedResourcesKeys.Deleted]
             };
         }
         public Response<T> Success<T>(T entity, object Meta = null)
@@ -29,7 +32,7 @@ namespace SchoolProject.Core.bases
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Added Successfully",
+                Message = _stringLocalizer[SharedResourcesKeys.Success],
                 Meta = Meta
             };
         }
@@ -39,7 +42,7 @@ namespace SchoolProject.Core.bases
             {
                 StatusCode = System.Net.HttpStatusCode.Unauthorized,
                 Succeeded = true,
-                Message = "UnAuthorized"
+                Message = _stringLocalizer[SharedResourcesKeys.UnAuthorized]
             };
         }
         public Response<T> BadRequest<T>(string Message = null)
@@ -48,7 +51,7 @@ namespace SchoolProject.Core.bases
             {
                 StatusCode = System.Net.HttpStatusCode.BadRequest,
                 Succeeded = false,
-                Message = Message == null ? "Bad Request" : Message
+                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.BadRequest] : Message
             };
         }
 
@@ -58,7 +61,7 @@ namespace SchoolProject.Core.bases
             {
                 StatusCode = System.Net.HttpStatusCode.NotFound,
                 Succeeded = false,
-                Message = message == null ? "Not Found" : message
+                Message = message == null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message
             };
         }
 
@@ -69,7 +72,7 @@ namespace SchoolProject.Core.bases
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.Created,
                 Succeeded = true,
-                Message = "Created",
+                Message = _stringLocalizer[SharedResourcesKeys.Created],
                 Meta = Meta
             };
         }
