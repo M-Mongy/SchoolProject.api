@@ -16,6 +16,10 @@ namespace SchoolProject.Service.Absract
         public Task<string> DeleteAsync(Student student);
         public Task<bool> IsNameExsit(string Name);
         public Task<bool> IsNameExsitExclusive(string Name,int id);
+        public IQueryable<Student> GetStudentQueryable();
+        public IQueryable<Student> FilterStudentPaginatedQuerable(string Search);
+
+
 
     }
 }

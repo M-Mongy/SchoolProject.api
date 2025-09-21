@@ -42,6 +42,18 @@ namespace SchoolProject.Service.Implemntation
             return "Success";
         }
 
+        public IQueryable<Student> FilterStudentPaginatedQuerable( string Search)
+        {
+           var FilterPaginated= _repository.GetTableNoTracking().Include(x=>x.Departments).AsQueryable();
+            if (Search != null)
+            {
+                FilterPaginated = FilterPaginated.Where(x => x.Name.Contains(Search) || x.Address.Contains(Search));
+            }
+           
+            return FilterPaginated;
+
+        }
+
         public Task<Student> GetStudentByIdAsync(int id)
         {
             var student = _repository.GetTableNoTracking().Include(x => x.Departments)
@@ -53,6 +65,11 @@ namespace SchoolProject.Service.Implemntation
         public async Task<List<Student>> GetStudentListAsync()
         {
             return await _repository.GetStudentListAsync();
+        }
+
+        public IQueryable<Student> GetStudentQueryable()
+        {
+           return _repository.GetTableNoTracking().Include(x=>x.Departments).AsQueryable(); 
         }
 
         public async Task<bool> IsNameExsit(string Name)
