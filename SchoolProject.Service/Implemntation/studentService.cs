@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Helper;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Service.Absract;
 
@@ -42,14 +43,30 @@ namespace SchoolProject.Service.Implemntation
             return "Success";
         }
 
-        public IQueryable<Student> FilterStudentPaginatedQuerable( string Search)
+        public IQueryable<Student> FilterStudentPaginatedQuerable(StudentOrderingEnum orderEnum , string Search)
         {
            var FilterPaginated= _repository.GetTableNoTracking().Include(x=>x.Departments).AsQueryable();
             if (Search != null)
             {
                 FilterPaginated = FilterPaginated.Where(x => x.Name.Contains(Search) || x.Address.Contains(Search));
             }
-           
+
+            switch (orderEnum)
+            {
+                case StudentOrderingEnum.StudID:
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.StudID);   
+                    break;
+                case StudentOrderingEnum.Address:
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.Address);
+                    break;
+                case StudentOrderingEnum.Name:
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.Name);
+                    break;
+                case StudentOrderingEnum.DepartmentName:
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.Departments.DName);
+                    break;
+            }
+
             return FilterPaginated;
 
         }

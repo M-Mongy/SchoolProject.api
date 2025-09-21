@@ -40,7 +40,7 @@ namespace SchoolProject.Core.Features.student.Queries.Handler
         {
             Expression<Func<Student, GetStudentPaginatedListResponse>> exception = e => new GetStudentPaginatedListResponse(e.StudID, e.Name,e.Address,e.Departments.DName);
             //var Querable=_service.GetStudentQueryable();
-            var QuerableFilter = _service.FilterStudentPaginatedQuerable(request.Search);
+            var QuerableFilter = _service.FilterStudentPaginatedQuerable(request.orderBy,request.Search);
             var PaginatedList = await QuerableFilter.Select(exception).ToPaginatedListAsync(request.pageNumber, request.pageSize);
             return PaginatedList;
         }

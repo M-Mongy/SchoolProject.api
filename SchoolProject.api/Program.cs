@@ -4,7 +4,6 @@ using SchoolProject.Core.MiddleWare;
 using SchoolProject.Infrastructure;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Service;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

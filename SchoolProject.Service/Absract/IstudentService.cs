@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Helper;
 
 namespace SchoolProject.Service.Absract
 {
@@ -17,7 +18,7 @@ namespace SchoolProject.Service.Absract
         public Task<bool> IsNameExsit(string Name);
         public Task<bool> IsNameExsitExclusive(string Name,int id);
         public IQueryable<Student> GetStudentQueryable();
-        public IQueryable<Student> FilterStudentPaginatedQuerable(string Search);
+        public IQueryable<Student> FilterStudentPaginatedQuerable(StudentOrderingEnum OrderEnum, string Search);
 
 
 
