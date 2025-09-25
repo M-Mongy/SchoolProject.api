@@ -11,9 +11,8 @@ namespace SchoolProject.Core.Features.student.Commands.models
 {
      public class AddStudentCommand : IRequest<Response<string>>
      {
-        [Required]
-        public string name { get; set; }
-        [Required]
+        public string NameAr { get; set; }
+        public string NameEn { get; set; }
         public string address { get; set; }
         public string phone  { get; set; }
         public int Department_id  { get; set; }

@@ -13,7 +13,7 @@ namespace SchoolProject.Core.Features.Mapping.student
         public void getStudentListMapping() 
         {
             CreateMap<Student, getStudentQueryListResponse>()
-        .ForMember(x => x.departmentName, opt => opt.MapFrom(src => src.Departments.DNameAr));
+        .ForMember(x => x.departmentName, opt => opt.MapFrom(src => src.Department.DNameAr));
         }
     }
 }

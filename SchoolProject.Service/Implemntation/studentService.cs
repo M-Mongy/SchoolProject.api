@@ -45,7 +45,7 @@ namespace SchoolProject.Service.Implemntation
 
         public IQueryable<Student> FilterStudentPaginatedQuerable(StudentOrderingEnum orderEnum , string Search)
         {
-           var FilterPaginated= _repository.GetTableNoTracking().Include(x=>x.Departments).AsQueryable();
+           var FilterPaginated= _repository.GetTableNoTracking().Include(x=>x.Department).AsQueryable();
             if (Search != null)
             {
                 FilterPaginated = FilterPaginated.Where(x => x.NameAr.Contains(Search) || x.Address.Contains(Search));
@@ -63,7 +63,7 @@ namespace SchoolProject.Service.Implemntation
                     FilterPaginated = FilterPaginated.OrderBy(x => x.NameAr);
                     break;
                 case StudentOrderingEnum.DepartmentName:
-                    FilterPaginated = FilterPaginated.OrderBy(x => x.Departments.DNameAr);
+                    FilterPaginated = FilterPaginated.OrderBy(x => x.Department.DNameAr);
                     break;
             }
 
@@ -73,7 +73,7 @@ namespace SchoolProject.Service.Implemntation
 
         public Task<Student> GetStudentByIdAsync(int id)
         {
-            var student = _repository.GetTableNoTracking().Include(x => x.Departments)
+            var student = _repository.GetTableNoTracking().Include(x => x.Department)
                 .Where(x => x.StudID.Equals(id)).FirstOrDefaultAsync();
 
             return student;
@@ -86,7 +86,7 @@ namespace SchoolProject.Service.Implemntation
 
         public IQueryable<Student> GetStudentQueryable()
         {
-           return _repository.GetTableNoTracking().Include(x=>x.Departments).AsQueryable(); 
+           return _repository.GetTableNoTracking().Include(x=>x.Department).AsQueryable(); 
         }
 
         public async Task<bool> IsNameExsit(string Name)

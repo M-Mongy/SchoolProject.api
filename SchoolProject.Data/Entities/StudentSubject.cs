@@ -10,16 +10,17 @@ namespace SchoolProject.Data.Entities
 {
     public class StudentSubject
     {
-        [Key]
-        public int StudSubID { get; set; }
+        // FIX: Removed the conflicting [Key] attributes.
         public int StudID { get; set; }
         public int SubID { get; set; }
+        public decimal? grade { get; set; }
 
         [ForeignKey("StudID")]
-        public virtual Student Student { get; set; }
+        [InverseProperty("StudentSubject")]
+        public virtual Student? Student { get; set; }
 
         [ForeignKey("SubID")]
-        public virtual Subjects Subject { get; set; }
-
+        [InverseProperty("StudentsSubjects")]
+        public virtual Subjects? Subject { get; set; }
     }
 }

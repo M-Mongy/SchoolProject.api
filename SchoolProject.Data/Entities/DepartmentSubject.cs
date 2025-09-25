@@ -10,15 +10,17 @@ namespace SchoolProject.Data.Entities
 {
     public class DepartmentSubject
     {
-        [Key]
-        public int DeptSubID { get; set; }
+        // FIX: Removed the conflicting [Key] attributes.
         public int DID { get; set; }
         public int SubID { get; set; }
 
         [ForeignKey("DID")]
-        public virtual Department Department { get; set; }
+        [InverseProperty("DepartmentSubjects")]
+        public virtual Department? Department { get; set; }
 
         [ForeignKey("SubID")]
-        public virtual Subjects Subjects { get; set; }
+        // FIX: Corrected the InverseProperty to match the fixed property name in Subjects.cs
+        [InverseProperty("DepartmentSubjects")]
+        public virtual Subjects? Subject { get; set; }
     }
 }

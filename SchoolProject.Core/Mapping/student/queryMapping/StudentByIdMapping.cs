@@ -13,7 +13,7 @@ namespace SchoolProject.Core.Features.Mapping.student
         public void getStudentByIdMapping()
         {
             CreateMap<Student, getSingleStudentResponse>()
-           .ForMember(x => x.departmentName, opt => opt.MapFrom(src => src.Departments.DNameAr))
+           .ForMember(x => x.departmentName, opt => opt.MapFrom(src => src.Department.localize(src.NameAr, src.NameEn)))
            .ForMember(x => x.Name, opt => opt.MapFrom(src => src.localize(src.NameAr,src.NameEn)));
         }
     }

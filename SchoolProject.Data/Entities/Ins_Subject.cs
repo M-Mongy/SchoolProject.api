@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SchoolProject.Data.Entities
+{
+    public class Ins_Subject
+    {
+        public int InsId { get; set; }
+        public int SubId { get; set; }
+        [ForeignKey(nameof(InsId))]
+        [InverseProperty("Ins_Subjects")]
+        public Instructor? instructor { get; set; }
+        [ForeignKey(nameof(SubId))]
+        [InverseProperty("Ins_Subjects")]
+        public Subjects? Subject { get; set; }
+
+    }
+}

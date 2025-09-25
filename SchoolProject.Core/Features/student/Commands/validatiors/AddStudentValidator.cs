@@ -24,7 +24,7 @@ namespace SchoolProject.Core.Features.student.Commands.validatiors
         #region Actions
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.name)
+            RuleFor(x => x.NameAr)
                 .NotEmpty().WithMessage("Name Must not Be Empty")
                 .NotNull().WithMessage("Name Must not be Null")
                 .MaximumLength(10).WithMessage("MAX Length is 10");
@@ -37,7 +37,7 @@ namespace SchoolProject.Core.Features.student.Commands.validatiors
 
         public void ApplyCustomValidationsRules() 
         {
-            RuleFor(x => x.name).MustAsync(async (Key, CancellationToken) => !await _service.IsNameExsit(Key))
+            RuleFor(x => x.NameAr).MustAsync(async (Key, CancellationToken) => !await _service.IsNameExsit(Key))
                 .WithMessage("Name is Exist");
         }
         #endregion

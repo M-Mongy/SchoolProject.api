@@ -14,7 +14,9 @@ namespace SchoolProject.Core.Features.Mapping.student
         {
             CreateMap<EditStudentCommand, Student>()
                 .ForMember(dest => dest.DID, opt => opt.MapFrom(src => src.Department_id))
-                .ForMember(dest => dest.StudID, opt => opt.MapFrom(src=>src.id));
+                .ForMember(dest => dest.NameAr, opt => opt.MapFrom(src => src.Department_id))
+                .ForMember(dest => dest.NameEn, opt => opt.MapFrom(src => src.Department_id))
+                .ForMember(dest => dest.StudID, opt => opt.MapFrom(src => src.id));
 
         }
     }

@@ -11,9 +11,9 @@ namespace SchoolProject.Core.Features.student.Commands.models
 {
     public class EditStudentCommand: IRequest<Response<string>>
     {
-        [Required]
         public int id { get; set; }
-        public string name { get; set; }
+        public string NameAr { get; set; }
+        public string NameEn { get; set; }
 
         public string address { get; set; }
         public string? phone { get; set; }

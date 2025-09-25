@@ -10,7 +10,8 @@ namespace SchoolProject.Core.Features.student.Queries.Results
     public class getStudentQueryListResponse
     {
         public int StudID { get; set; }
-        public string? Name { get; set; }
+        public string? NameEn { get; set; }
+        public string? NameAr { get; set; }
         public string? Address { get; set; }
         public string? departmentName { get; set; }
     }
