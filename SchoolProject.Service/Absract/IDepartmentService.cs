@@ -10,5 +10,6 @@ namespace SchoolProject.Service.Absract
     public interface IDepartmentService
     {
         public Task<Department> GetDepartmentById(int id);
+        public Task<bool> IsDepartmentIdExist(int DepartmentId);
     }
 }

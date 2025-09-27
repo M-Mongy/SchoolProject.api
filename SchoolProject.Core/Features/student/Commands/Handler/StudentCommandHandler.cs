@@ -16,7 +16,7 @@ using ProjectResponse = SchoolProject.Core.bases.Response<string>;
 
 namespace SchoolProject.Core.Features.student.Commands.Handler
 {
-    public class AddStudentCommandHandler : ResponseHandler,
+    public class StudentCommandHandler : ResponseHandler,
                                             IRequestHandler<AddStudentCommand, ProjectResponse>,
                                             IRequestHandler<EditStudentCommand, ProjectResponse>,
                                             IRequestHandler<DeleteStudentCommand, ProjectResponse>
@@ -26,7 +26,7 @@ namespace SchoolProject.Core.Features.student.Commands.Handler
         private readonly IStringLocalizer<SharedResource> _stringLocalizer ;
 
 
-        public AddStudentCommandHandler(IstudentService service,
+        public StudentCommandHandler(IstudentService service,
             IMapper mapper, IStringLocalizer<SharedResource> stringLocalizer ) : base(stringLocalizer)
         {
             _service = service;

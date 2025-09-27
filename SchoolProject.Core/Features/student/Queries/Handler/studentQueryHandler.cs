@@ -14,6 +14,7 @@ using SchoolProject.Core.SharedResources;
 using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Entities;
 using SchoolProject.Service.Absract;
+using SchoolProject.Service.Implemntation;
 
 namespace SchoolProject.Core.Features.student.Queries.Handler
 {
@@ -43,14 +44,15 @@ namespace SchoolProject.Core.Features.student.Queries.Handler
 
         public async Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
         {
-            Expression<Func<Student, GetStudentPaginatedListResponse>> exception = e => new GetStudentPaginatedListResponse(e.StudID, e.NameEn,e.Address,e.Department.DNameEn);
-            //var Querable=_service.GetStudentQueryable();
-            var QuerableFilter = _service.FilterStudentPaginatedQuerable(request.orderBy,request.Search);
-            var PaginatedList = await QuerableFilter.Select(exception).ToPaginatedListAsync(request.pageNumber, request.pageSize);
+            //Expression<Func<Student, GetStudentPaginatedListResponse>> exception = e => new GetStudentPaginatedListResponse(e.StudID, e.NameEn,e.Address,e.Department.DNameEn);
+            var FilterQuery = _service.FilterStudentPaginatedQuerable(request.orderBy, request.Search);
+            var PaginatedList = await _mapper.ProjectTo<GetStudentPaginatedListResponse>(FilterQuery).ToPaginatedListAsync(request.pageNumber, request.pageSize);
+            PaginatedList.Meta = new { Count = PaginatedList.Data.Count() };
             return PaginatedList;
+
         }
 
-         public async Task<Response<getSingleStudentResponse>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<getSingleStudentResponse>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
         {
             var student = await _service.GetStudentByIdAsync(request.Id);
             if (student == null) return NotFound<getSingleStudentResponse>(_stringLocalizer[SharedResourcesKeys.NotFound]);

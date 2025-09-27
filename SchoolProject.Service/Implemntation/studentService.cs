@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
 using SchoolProject.Data.Helper;
 using SchoolProject.Infrastructure.Abstract;
+using SchoolProject.Infrastructure.Repositories;
 using SchoolProject.Service.Absract;
 
 namespace SchoolProject.Service.Implemntation
@@ -33,8 +34,16 @@ namespace SchoolProject.Service.Implemntation
 
         public async Task<string> DeleteAsync(Student student)
         {
+            var trans = _repository.BeginTransaction();
+            try { 
             await _repository.DeleteAsync(student);
+            await trans.CommitAsync();
             return "Deleted Successfully ";
+            }
+            catch { 
+            await trans.RollbackAsync();
+                return "failed";
+            }
         }
 
         public async Task<string> EditAsync(Student student)

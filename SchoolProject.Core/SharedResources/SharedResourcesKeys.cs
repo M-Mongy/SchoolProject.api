@@ -16,5 +16,8 @@ namespace SchoolProject.Core.SharedResources
         public const string BadRequest = "Bad Request";
         public const string Created = "Created";
         public const string Success = "Success";
+        public const string IsExist = "IsExist";
+        public const string NotEmpty = "NotEmpty";
+        public const string MaxLengthis100 = "MaxLengthis100";
     }
 }
