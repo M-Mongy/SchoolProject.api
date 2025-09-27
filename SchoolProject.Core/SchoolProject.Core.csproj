@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Mapping\Department\**" />
+    <EmbeddedResource Remove="Mapping\Department\**" />
+    <None Remove="Mapping\Department\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SchoolProject.Data\SchoolProject.Data.csproj" />
     <ProjectReference Include="..\SchoolProject.Infrastructure\SchoolProject.Infrastructure.csproj" />
     <ProjectReference Include="..\SchoolProject.Service\SchoolProject.Service.csproj" />
@@ -19,6 +25,11 @@
     <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Department\Commands\" />
+    <Folder Include="Mapping\Departments\CommandMapping\" />
   </ItemGroup>
 
 </Project>

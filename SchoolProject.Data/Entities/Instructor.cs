@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SchoolProject.Data.Commons;
 namespace SchoolProject.Data.Entities
 {
-    public class Instructor
+    public class Instructor: GeneralLocalizableEntity
     {
         public Instructor()
         {

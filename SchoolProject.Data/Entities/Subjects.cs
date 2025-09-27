@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolProject.Data.Commons;
 
 namespace SchoolProject.Data.Entities
 {
-    public class Subjects
+    public class Subjects: GeneralLocalizableEntity
     {
         public Subjects()
         {
