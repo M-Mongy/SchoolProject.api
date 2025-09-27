@@ -47,7 +47,7 @@ namespace SchoolProject.Infrastructure.Migrations
                         .IsUnique()
                         .HasFilter("[InsManager] IS NOT NULL");
 
-                    b.ToTable("departments");
+                    b.ToTable("departments", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.DepartmentSubject", b =>
@@ -62,7 +62,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("DID");
 
-                    b.ToTable("DepartmentSubjects");
+                    b.ToTable("DepartmentSubjects", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Ins_Subject", b =>
@@ -77,7 +77,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("InsId");
 
-                    b.ToTable("Ins_Subjects");
+                    b.ToTable("Ins_Subjects", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Instructor", b =>
@@ -118,7 +118,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instructors", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Student", b =>
@@ -150,7 +150,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("DID");
 
-                    b.ToTable("students");
+                    b.ToTable("students", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.StudentSubject", b =>
@@ -168,7 +168,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("StudID");
 
-                    b.ToTable("StudentSubjects");
+                    b.ToTable("StudentSubjects", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Subjects", b =>
@@ -191,7 +191,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasKey("SubID");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Department", b =>
