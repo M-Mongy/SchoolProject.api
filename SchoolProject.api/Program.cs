@@ -6,6 +6,7 @@ using SchoolProject.Core.MiddleWare;
 using SchoolProject.Infrastructure;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Service;
+using SchoolProject.Infrastructure.Registration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,14 +19,15 @@ builder.Services.AddSwaggerGen();
 #region Dependencies
 builder.Services.addInfrastructureDependencies()
                 .addServiceDependencies()
-                .addCoreDependencies();
+                .addCoreDependencies()
+                .AddIdentityServices();
 #endregion
 
-builder.Services.AddDbContext<ApplicationDBContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
-});
 
+builder.Services.AddDbContext<ApplicationDBContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
+});
 
 #region Localization
 builder.Services.AddControllersWithViews();
