@@ -37,6 +37,8 @@ namespace SchoolProject.Data.AppMetaData
             public const string Paginated = Prefix + "/Paginated";
             public const string GetByID = Prefix + SignleRoute;
             public const string Edit = Prefix + "/Edit";
+            public const string Delete = Prefix + SignleRoute;
+
         }
     }
 }

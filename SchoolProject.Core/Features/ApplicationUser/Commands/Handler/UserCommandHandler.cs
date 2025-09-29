@@ -18,14 +18,15 @@ using SchoolProject.Data.Entities.Identity;
 
 namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
 {
-    public class AddUserCommandHandler : ResponseHandler
+    public class UserCommandHandler : ResponseHandler
         ,IRequestHandler<AddUserCommand, Response<string>>
         ,IRequestHandler<UpdateUserCommand, Response<string>>
+        ,IRequestHandler<DeleteUserCommand, Response<string>>
     {
         private readonly IStringLocalizer<SharedResource> _sharedResources;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-        public AddUserCommandHandler(IStringLocalizer<SharedResource> stringLocalizer
+        public UserCommandHandler(IStringLocalizer<SharedResource> stringLocalizer
                                      ,IMapper mapper
                                      ,UserManager<User> userManager) : base(stringLocalizer)
         {
@@ -60,6 +61,18 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
             var result = await _userManager.UpdateAsync(newUser);
             if (!result.Succeeded) { return BadRequest<string>(_sharedResources[SharedResourcesKeys.NameIsExist]);}
             return Success((string)_sharedResources[SharedResourcesKeys.Updated]);
+        }
+
+        public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            var User = await _userManager.FindByIdAsync(request.Id.ToString());
+            if (User == null) return NotFound<string>();
+
+            var result= await _userManager.DeleteAsync(User);
+            if (!result.Succeeded) {return BadRequest<string>(_sharedResources[SharedResourcesKeys.DeleteFailed]); }
+
+
+            return Success((string)_sharedResources[SharedResourcesKeys.Deleted]);
         }
     }
 }
