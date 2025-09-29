@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Mvc;
 using SchoolProject.api.Base;
 using SchoolProject.Core.Features.ApplicationUser.Commands.Models;
 using SchoolProject.Core.Features.ApplicationUser.Queries.Models;
@@ -27,11 +28,18 @@ namespace SchoolProject.api.Controllers
             return Ok(response);
         }
 
-        [HttpGet(Router.StudentRouting.GetByID)]
+        [HttpGet(Router.ApplicationUserRouting.GetByID)]
         public async Task<IActionResult> GetStudentById([FromRoute] int id)
         {
             var response = await Mediator.Send(new GetUserByIdQuery(id));
             return Ok(response);
+        }
+
+        [HttpPut(Router.ApplicationUserRouting.Edit)]
+        public async Task<IActionResult> Edit([FromBody] UpdateUserCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
         }
 
     }

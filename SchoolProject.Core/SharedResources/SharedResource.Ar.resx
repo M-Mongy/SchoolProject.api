@@ -153,4 +153,10 @@
   <data name="faildCreate" xml:space="preserve">
     <value>فشل اضافة المستخدم</value>
   </data>
+  <data name="UpdateFaild" xml:space="preserve">
+    <value>فشل في التحديث </value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>تم التعديل بنجاح</value>
+  </data>
 </root>

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -16,8 +18,9 @@ using SchoolProject.Data.Entities.Identity;
 
 namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
 {
-    public class AddUserCommandHandler : ResponseHandler,
-        IRequestHandler<AddUserCommand, Response<string>>
+    public class AddUserCommandHandler : ResponseHandler
+        ,IRequestHandler<AddUserCommand, Response<string>>
+        ,IRequestHandler<UpdateUserCommand, Response<string>>
     {
         private readonly IStringLocalizer<SharedResource> _sharedResources;
         private readonly IMapper _mapper;
@@ -47,6 +50,16 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
             }
 
             return Created("");
+        }
+
+        public async Task<Response<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            var oldUser = await _userManager.FindByIdAsync(request.Id.ToString());
+            if (oldUser == null) return NotFound<string>();
+            var newUser = _mapper.Map(request, oldUser);
+            var result = await _userManager.UpdateAsync(newUser);
+            if (!result.Succeeded) { return BadRequest<string>(_sharedResources[SharedResourcesKeys.NameIsExist]);}
+            return Success((string)_sharedResources[SharedResourcesKeys.Updated]);
         }
     }
 }

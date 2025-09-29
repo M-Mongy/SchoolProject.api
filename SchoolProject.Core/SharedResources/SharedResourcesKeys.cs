@@ -23,5 +23,7 @@ namespace SchoolProject.Core.SharedResources
         public const string EmailIsExist = "EmailIsExist";
         public const string NameIsExist = "NameIsExist";
         public const string faildCreate = "faildCreate";
+        public const string UpdateFaild = "UpdateFaild";
+        public const string Updated = "Updated Successfully";
     }
 }
