@@ -22,6 +22,7 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
         ,IRequestHandler<AddUserCommand, Response<string>>
         ,IRequestHandler<UpdateUserCommand, Response<string>>
         ,IRequestHandler<DeleteUserCommand, Response<string>>
+        ,IRequestHandler<ChangeUserPasswordCommand, Response<string>>
     {
         private readonly IStringLocalizer<SharedResource> _sharedResources;
         private readonly IMapper _mapper;
@@ -73,6 +74,21 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
 
 
             return Success((string)_sharedResources[SharedResourcesKeys.Deleted]);
+        }
+
+        public async Task<Response<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByIdAsync(request.id.ToString());
+            //if Not Exist notfound
+            if (user == null) return NotFound<string>();
+
+            //Change User Password
+            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+          
+
+            //result
+            if (!result.Succeeded) return BadRequest<string>(result.Errors.FirstOrDefault().Description);
+            return Success((string)_sharedResources[SharedResourcesKeys.Success]);
         }
     }
 }
