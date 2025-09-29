@@ -19,5 +19,9 @@ namespace SchoolProject.Core.SharedResources
         public const string IsExist = "IsExist";
         public const string NotEmpty = "NotEmpty";
         public const string MaxLengthis100 = "MaxLengthis100";
+        public const string PasswordNotEqualConfirmPass = "PasswordNotEqualConfirmPass";
+        public const string EmailIsExist = "EmailIsExist";
+        public const string NameIsExist = "NameIsExist";
+        public const string faildCreate = "faildCreate";
     }
 }

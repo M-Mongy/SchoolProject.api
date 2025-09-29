@@ -13,7 +13,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.20" />
-		<!-- Redundant reference to Microsoft.EntityFrameworkCore can be removed -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.20">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -141,4 +141,16 @@
   <data name="Success" xml:space="preserve">
     <value>عمليه ناجحه </value>
   </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>كلمة السر غير متطابقة </value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>الايميل موجود بالفعل </value>
+  </data>
+  <data name="NameIsExist" xml:space="preserve">
+    <value>الاسم موجود بالفعل </value>
+  </data>
+  <data name="faildCreate" xml:space="preserve">
+    <value>فشل اضافة المستخدم</value>
+  </data>
 </root>

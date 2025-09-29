@@ -141,4 +141,16 @@
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>Password and Confirmpassword not Equal</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>Email Is already Exist</value>
+  </data>
+  <data name="NameIsExist" xml:space="preserve">
+    <value>Name Is already Exist</value>
+  </data>
+  <data name="faildCreate" xml:space="preserve">
+    <value>Faild Create User </value>
+  </data>
 </root>
