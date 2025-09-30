@@ -30,6 +30,13 @@ namespace SchoolProject.Data.AppMetaData
             public const string Prefix = Rule + "Department";
             public const string GetByID = Prefix + SignleRoute;
         }
+        
+        public static class AuthenticationRouting
+        {
+            public const string Prefix = Rule + "Authentication";
+            public const string SignIn = Prefix + "/SignIn";
+
+        }
         public static class ApplicationUserRouting
         {
             public const string Prefix = Rule + "User";

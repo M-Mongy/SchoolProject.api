@@ -26,5 +26,8 @@ namespace SchoolProject.Core.SharedResources
         public const string UpdateFaild = "UpdateFaild";
         public const string Updated = "Updated Successfully";
         public const string DeleteFailed = "Delete Failed ";
+        public const string NameIsNotExist = "Name Is Not Exist";
+        public const string PasswordOrUserNameNotCorrect = "Password or UserName Not Correct";
+        
     }
 }

@@ -17,10 +17,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #region Dependencies
-builder.Services.addInfrastructureDependencies()
-                .addServiceDependencies()
-                .addCoreDependencies()
-                .AddIdentityServices();
+builder.Services
+    .addInfrastructureDependencies()
+    .addServiceDependencies()
+    .addCoreDependencies()
+    .AddIdentityServices(builder.Configuration);
 #endregion
 
 
@@ -62,7 +63,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

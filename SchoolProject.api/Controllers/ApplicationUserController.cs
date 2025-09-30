@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.api.Base;
 using SchoolProject.Core.Features.ApplicationUser.Commands.Models;
@@ -12,6 +13,7 @@ namespace SchoolProject.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ApplicationUserController : AppControllerBase
     {
         [HttpPost(Router.ApplicationUserRouting.Create)]
@@ -19,8 +21,7 @@ namespace SchoolProject.api.Controllers
         {
             var response = await Mediator.Send(command);
             return NewResult(response);
-        }     
-        
+        }
         [HttpGet(Router.ApplicationUserRouting.Paginated)]
         public async Task<IActionResult> Paginated([FromQuery] GetUserPaginateQuery query)
         {
