@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Concurrent;
+using Microsoft.Extensions.DependencyInjection;
+using SchoolProject.Data.Helper;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Infrastructure.Repositories;
 using SchoolProject.Service.Absract;
@@ -13,6 +15,7 @@ namespace SchoolProject.Service
             services.AddTransient<IstudentService, studentService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IAuthenticationsService, AuthenticationsService>();
+            services.AddSingleton(new ConcurrentDictionary<string, JWTAuthResponse.RefreshToken>());
             return services;
         }
 

@@ -7,7 +7,6 @@ using SchoolProject.Data.AppMetaData;
 
 namespace SchoolProject.api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : AppControllerBase
     {
@@ -17,5 +16,6 @@ namespace SchoolProject.api.Controllers
             var response = await Mediator.Send(command);
             return NewResult(response);
         }
+
     }
 }

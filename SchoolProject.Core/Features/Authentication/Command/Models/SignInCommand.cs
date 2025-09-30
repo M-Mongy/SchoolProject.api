@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using SchoolProject.Core.bases;
+using SchoolProject.Data.Helper;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace SchoolProject.Core.Features.Authentication.Command.Models
 {
-    public class SignInCommand:IRequest<Response<string>>
+    public class SignInCommand:IRequest<Response<JWTAuthResponse>>
     {
         [DefaultValue("")]
         public string UserName { get; set; }
