@@ -8,3 +8,25 @@
 GET {{SchoolProject.api_HostAddress}}/student/List
 
 ###
+
+POST {{SchoolProject.api_HostAddress}}/api/applicationuser/Api/V1/User/Create
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImFsaSIsIkVtYWlsIjoiYWxpQDEyMyIsIlBob25lTnVtYmVyIjoiNzk4MSIsIklkIjoiNCIsImV4cCI6MTc1OTMyNzE4MywiaXNzIjoiU2Nob29sUHJvamVjdCIsImF1ZCI6IldlYlNpdGUifQ.n9FhS-S9xMMD6ebzV1yTMi9xB4L28mjmzI2HlsjqsXA
+
+{
+"fullName": "Mohamed El-Sherif",
+"userName": "mohamed.sherif",
+"email": "mohamed.sherif@example.com",
+"address": "123 Nile Street, Sherouk City",
+"country": "Egypt",
+"phoneNumber": "+20 100 123 4567",
+"password": "SecureP@ssw0rd!",
+"confirmPassword": "SecureP@ssw0rd!"
+}
+
+###
+
+GET {{SchoolProject.api_HostAddress}}/api/applicationuser/Api/V1/User/Paginated
+
+###

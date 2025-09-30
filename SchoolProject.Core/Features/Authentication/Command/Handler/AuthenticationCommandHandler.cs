@@ -17,7 +17,8 @@ using SchoolProject.Service.Absract;
 namespace SchoolProject.Core.Features.Authentication.Command.Handler
 {
     public class AuthenticationCommandHandler : ResponseHandler,
-        IRequestHandler<SignInCommand, Response<JWTAuthResponse>>
+        IRequestHandler<SignInCommand, Response<JWTAuthResponse>>,
+        IRequestHandler<RefreshTokenCommand, Response<JWTAuthResponse>>
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signManager;
@@ -45,10 +46,14 @@ namespace SchoolProject.Core.Features.Authentication.Command.Handler
             if (!signInResult.IsCompletedSuccessfully) return BadRequest<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
 
 
-            var AccessToken =await _authenticationsService.GetJWTtoken(user);
+            var AccessToken =await _authenticationsService.GetJWTToken(user);
             return Success(AccessToken);
         }
 
- 
+        public async Task<Response<JWTAuthResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationsService.GetRefreshToken(request.AccessToken, request.RefreshToken);
+            return Success(result);
+        }
     }
 }

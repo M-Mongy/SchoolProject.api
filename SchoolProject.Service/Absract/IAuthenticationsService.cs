@@ -10,6 +10,8 @@ namespace SchoolProject.Service.Absract
 {
     public interface IAuthenticationsService
     {
-        public Task<JWTAuthResponse> GetJWTtoken(User user);
+        public Task<JWTAuthResponse> GetJWTToken(User user);
+        public Task<JWTAuthResponse> GetRefreshToken(string accessToken, string refreshToken);
+        public Task<string> ValidateToken(string AccessToken);
     }
 }

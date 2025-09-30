@@ -13,9 +13,10 @@ namespace SchoolProject.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+
     public class ApplicationUserController : AppControllerBase
     {
+        [Authorize]
         [HttpPost(Router.ApplicationUserRouting.Create)]
         public async Task<IActionResult> Create([FromBody] AddUserCommand command)
         {

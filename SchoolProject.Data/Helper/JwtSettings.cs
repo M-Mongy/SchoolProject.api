@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SchoolProject.Data.Helper
+﻿namespace SchoolProject.Data.Helpers
 {
     public class JwtSettings
     {
@@ -18,4 +12,5 @@ namespace SchoolProject.Data.Helper
         public int AccessTokenExpireDate { get; set; }
         public int RefreshTokenExpireDate { get; set; }
     }
+
 }

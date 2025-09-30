@@ -6,7 +6,6 @@ using SchoolProject.Core.MiddleWare;
 using SchoolProject.Infrastructure;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Service;
-using SchoolProject.Infrastructure.Registration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,7 +20,7 @@ builder.Services
     .addInfrastructureDependencies()
     .addServiceDependencies()
     .addCoreDependencies()
-    .AddIdentityServices(builder.Configuration);
+    .AddServiceRegisteration(builder.Configuration);
 #endregion
 
 

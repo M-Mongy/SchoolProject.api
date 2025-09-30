@@ -15,6 +15,13 @@ namespace SchoolProject.api.Controllers
         {
             var response = await Mediator.Send(command);
             return NewResult(response);
+        }      
+        
+        [HttpPost(Router.AuthenticationRouting.RefreshToken)]
+        public async Task<IActionResult> RefreshToken([FromForm] RefreshTokenCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
         }
 
     }
