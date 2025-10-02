@@ -8,6 +8,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
+using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.student.Queries.models;
 using SchoolProject.Core.Features.student.Queries.Results;
 using SchoolProject.Core.SharedResources;

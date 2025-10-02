@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
+using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.Department.Queries.Models;
 using SchoolProject.Core.Features.Department.Queries.Results;
 using SchoolProject.Core.Features.student.Queries.Results;

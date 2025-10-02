@@ -12,9 +12,11 @@ namespace SchoolProject.Core.SharedResources
         public const string NotFound = "Object Not Found";
         public const string Deleted = "Deleted";
         public const string Added = "Added";
+        public const string TokenIsExpired = "Token Is Expired";
         public const string UnAuthorized = "UnAuthorized";
         public const string BadRequest = "Bad Request";
         public const string Created = "Created";
+        public const string UnprocessableEntity = "Unprocessable Entity";
         public const string Success = "Success";
         public const string IsExist = "IsExist";
         public const string NotEmpty = "NotEmpty";

@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Authentication\Command\Handler\" />
     <Folder Include="Features\Authentication\Command\Result\" />
-    <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Features\Department\Commands\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
   </ItemGroup>
