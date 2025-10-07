@@ -11,6 +11,7 @@ namespace SchoolProject.Core.SharedResources
         public const string Required = "Required";
         public const string NotFound = "Object Not Found";
         public const string Deleted = "Deleted";
+        public const string addFailed = "Added Faild";
         public const string Added = "Added";
         public const string TokenIsExpired = "Token Is Expired";
         public const string UnAuthorized = "UnAuthorized";

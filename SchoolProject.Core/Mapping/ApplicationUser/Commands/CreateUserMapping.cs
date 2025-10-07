@@ -13,7 +13,11 @@ namespace SchoolProject.Core.Mapping.ApplicationUser
     {
         public void CreateUserMapping()
         {
-            CreateMap<AddUserCommand, User>();
+            CreateMap<AddUserCommand, User>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()) // ADD THIS!
+                .ForMember(dest => dest.SecurityStamp, opt => opt.Ignore()) // These are managed by Identity
+                .ForMember(dest => dest.ConcurrencyStamp, opt => opt.Ignore())
+                .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
         }
     }
 }

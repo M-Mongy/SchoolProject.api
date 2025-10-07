@@ -25,10 +25,8 @@ namespace SchoolProject.Service.Implemntation
         public async Task<string> AddAsync(Student student)
         {
 
-            if (student.StudID == null)
-            {
-            }
-            _repository.AddAsync(student);
+            student.StudID = 0;
+            await _repository.AddAsync(student);
             return "Added Successfully ";
         }
 

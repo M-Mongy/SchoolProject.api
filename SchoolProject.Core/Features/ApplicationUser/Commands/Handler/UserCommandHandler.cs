@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
 using SchoolProject.Core.Bases;
@@ -51,7 +52,16 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
             if (!createUser.Succeeded) {
                 return BadRequest<string>(createUser.Errors.FirstOrDefault().Description);
             }
-
+            var users= await _userManager.Users.ToListAsync();
+            if (users.Count >= 0)
+            {
+                await _userManager.AddToRoleAsync(IdentityUser, "User");
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(IdentityUser, "Admin");
+            }
+                
             return Created("");
         }
 

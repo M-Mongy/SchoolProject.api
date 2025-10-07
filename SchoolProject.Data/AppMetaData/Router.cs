@@ -43,6 +43,13 @@ namespace SchoolProject.Data.AppMetaData
             public const string SignIn = Prefix + "/SignIn";
             public const string RefreshToken = Prefix + "/RefreshToken";
 
+        }    
+        public static class AuthorizationRouting
+        {
+            public const string Prefix = Rule + "Authorization";
+            public const string create = Prefix + "/Create";
+   
+
         }
         public static class ApplicationUserRouting
         {
