@@ -10,11 +10,16 @@ namespace SchoolProject.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="Admin,User")]
     public class AuthorizationController : AppControllerBase
     {
-        [HttpPost(Router.ApplicationUserRouting.Create)]
+        [HttpPost(Router.AuthorizationRouting.Create)]
         public async Task<IActionResult> Create([FromForm] AddRolesCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }        
+        [HttpPost(Router.AuthorizationRouting.Edit)]
+        public async Task<IActionResult> Edit([FromForm] EditRoleCommand command)
         {
             var response = await Mediator.Send(command);
             return NewResult(response);
