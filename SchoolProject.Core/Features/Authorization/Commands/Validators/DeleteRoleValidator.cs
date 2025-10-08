@@ -4,48 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Features.Authorization.Commands.Models;
 using SchoolProject.Core.SharedResources;
 using SchoolProject.Service.Absract;
-using IAuthorizationService = SchoolProject.Service.Absract.IAuthorizationService;
 
 namespace SchoolProject.Core.Features.Authorization.Commands.Validators
 {
-    public class AddRolesValidator :AbstractValidator<AddRolesCommand>
+    public class DeleteRoleValidator:AbstractValidator<DeleteRoleCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResource> _stringLocalizer;
-        private readonly IAuthorizationService _authorizationService;
-        #endregion
-        #region Constructors
+        public readonly IAuthorizationService _authorizationService;
 
         #endregion
-        public AddRolesValidator(IStringLocalizer<SharedResource> stringLocalizer,
-                                 IAuthorizationService authorizationService)
+        #region Constructors
+        public DeleteRoleValidator(IStringLocalizer<SharedResource> stringLocalizer, IAuthorizationService authorizationService)
         {
             _stringLocalizer = stringLocalizer;
             _authorizationService = authorizationService;
             ApplyValidationsRules();
             ApplyCustomValidationsRules();
         }
-
-        #region Actions
+        #endregion
+        #region  Functions
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.RoleName)
+            RuleFor(x => x.Id)
                  .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
                  .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.Required]);
         }
-
         public void ApplyCustomValidationsRules()
         {
-            RuleFor(x => x.RoleName)
-                .MustAsync(async (Key, CancellationToken) => !await _authorizationService.IsRoleExistByName(Key))
-                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsExist]);
+            //RuleFor(x => x.Id)
+            //    .MustAsync(async (Key, CancellationToken) => await _authorizationService.IsRoleExistById(Key))
+            //    .WithMessage(_stringLocalizer[SharedResourcesKeys.RoleNotExist]);
         }
-
         #endregion
     }
 }

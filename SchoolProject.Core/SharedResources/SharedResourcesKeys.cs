@@ -31,6 +31,7 @@ namespace SchoolProject.Core.SharedResources
         public const string DeleteFailed = "Delete Failed ";
         public const string NameIsNotExist = "Name Is Not Exist";
         public const string PasswordOrUserNameNotCorrect = "Password or UserName Not Correct";
+        public const string Used = " Role is Used";
         
     }
 }

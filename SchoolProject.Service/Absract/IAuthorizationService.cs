@@ -10,7 +10,9 @@ namespace SchoolProject.Service.Absract
     public interface IAuthorizationService
     {
         public Task<string> AddRoleAsync(string roleName);
-        public Task<bool> IsRoleExist(string roleName);
+        public Task<bool> IsRoleExistByName(string roleName);
+        public Task<bool> IsRoleExistById(int RoleId);
+        public Task<string> DeleteRoleAsync(int RoleId);
         public Task<string> EditRoleAsync(EditRoleRequest editRole);
 
     }
