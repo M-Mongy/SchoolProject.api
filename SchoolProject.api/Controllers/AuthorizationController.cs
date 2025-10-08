@@ -10,7 +10,7 @@ namespace SchoolProject.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin,User")]
     public class AuthorizationController : AppControllerBase
     {
         [HttpPost(Router.ApplicationUserRouting.Create)]
