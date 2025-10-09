@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Service.Absract;
@@ -72,6 +73,16 @@ namespace SchoolProject.Service.Implemntation
             var role = await _roleManager.FindByIdAsync(RoleId.ToString());
             if (role == null) return false;
             else return true;
+        }
+
+        public async Task<List<Role>> GetRoleslistAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+
+        public async Task<Role> GetRoleByIdAsync(int id)
+        {
+            return await _roleManager.FindByIdAsync(id.ToString());
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SchoolProject.Data.DTOs;
+using SchoolProject.Data.Entities.Identity;
 
 namespace SchoolProject.Service.Absract
 {
@@ -14,6 +15,8 @@ namespace SchoolProject.Service.Absract
         public Task<bool> IsRoleExistById(int RoleId);
         public Task<string> DeleteRoleAsync(int RoleId);
         public Task<string> EditRoleAsync(EditRoleRequest editRole);
+        public Task<List<Role>> GetRoleslistAsync();
+        public Task<Role> GetRoleByIdAsync(int id);
 
     }
 }

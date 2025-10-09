@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolProject.api.Base;
 using SchoolProject.Core.Features.ApplicationUser.Commands.Models;
 using SchoolProject.Core.Features.Authorization.Commands.Models;
+using SchoolProject.Core.Features.Authorization.Queries.Models;
 using SchoolProject.Data.AppMetaData;
 
 namespace SchoolProject.api.Controllers
@@ -28,6 +29,19 @@ namespace SchoolProject.api.Controllers
         public async Task<IActionResult> Delete([FromRoute] int id )
         {
             var response = await Mediator.Send(new DeleteRoleCommand(id));
+            return NewResult(response);
+        }       
+        
+       [HttpPost(Router.AuthorizationRouting.RoleList)]
+        public async Task<IActionResult> RoleList()
+        {
+            var response = await Mediator.Send(new GetRolesListQuery());
+            return NewResult(response);
+        }
+        [HttpPost(Router.AuthorizationRouting.RoleById)]
+        public async Task<IActionResult> RoleById([FromRoute] int id)
+        {
+            var response = await Mediator.Send(new GetByIdQuery(id));
             return NewResult(response);
         }
     }
