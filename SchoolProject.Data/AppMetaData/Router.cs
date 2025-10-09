@@ -21,6 +21,7 @@ namespace SchoolProject.Data.AppMetaData
             
             public const string Create = Prefix + "/Create";
             public const string Edit = Prefix + "/Edit";
+            
             public const string Delete = Prefix + SignleRoute;
             public const string Paginated = Prefix + "/Paginated";
         }
@@ -53,6 +54,7 @@ namespace SchoolProject.Data.AppMetaData
             public const string RoleById = Prefix + "/Role/RoleById/{id}";
             public const string RoleList = Prefix + "/RoleList";
             public const string ManageUserRoles = Prefix + "/Manage-User-Roles/{userId}";
+            public const string UpdateUserRoles = Prefix + "/UpdateUserRoles";
 
 
         }

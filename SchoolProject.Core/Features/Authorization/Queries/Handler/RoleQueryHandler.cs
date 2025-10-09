@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
 using SchoolProject.Core.Bases;
+using SchoolProject.Core.Features.Authorization.Commands.Models;
 using SchoolProject.Core.Features.Authorization.Queries.Models;
 using SchoolProject.Core.Features.Authorization.Queries.Result;
 using SchoolProject.Core.SharedResources;
@@ -23,6 +24,7 @@ namespace SchoolProject.Core.Features.Authorization.Queries.Handler
         IRequestHandler<GetRolesListQuery, Response<List<GetRolesListResult>>>,
         IRequestHandler<GetByIdQuery, Response<GetRoleByIdResult>>,
         IRequestHandler<ManageUserRolesQuery, Response<ManageUserRolesResult>>
+ 
     {
         private readonly IAuthorizationService _authorizationService;
         private readonly IMapper _mapper;

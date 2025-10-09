@@ -34,6 +34,9 @@ namespace SchoolProject.Core.SharedResources
         public const string Used = " Role is Used";
         public const string RoleNotExist = "Role Not Exist";
         public const string UserIsNotFound = "User Is NotFound";
+        public const string FailedToRemoveOldRoles = "Failed To Remove Old Roles";
+        public const string FailedToAddNewRoles = "Failed To Add New Roles";
+        public const string FailedToUpdateUserRoles = "Failed To Update User Roles";
 
 
     }

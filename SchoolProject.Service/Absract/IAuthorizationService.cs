@@ -18,6 +18,7 @@ namespace SchoolProject.Service.Absract
         public Task<List<Role>> GetRoleslistAsync();
         public Task<Role> GetRoleByIdAsync(int id);
         public Task<ManageUserRolesResult> GetManageUserRolesData(User user);
+        public Task<string> UpdateUserRole(UpdateUserRoleRequest request);
 
     }
 }
