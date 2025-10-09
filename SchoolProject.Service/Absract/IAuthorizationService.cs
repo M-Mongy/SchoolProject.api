@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Requests;
+using SchoolProject.Data.Results;
 
 namespace SchoolProject.Service.Absract
 {
@@ -17,8 +19,10 @@ namespace SchoolProject.Service.Absract
         public Task<string> EditRoleAsync(EditRoleRequest editRole);
         public Task<List<Role>> GetRoleslistAsync();
         public Task<Role> GetRoleByIdAsync(int id);
-        public Task<ManageUserRolesResult> GetManageUserRolesData(User user);
+        public Task<ManageUserRolesResult> ManageUserRolesData(User user);
         public Task<string> UpdateUserRole(UpdateUserRoleRequest request);
+        public Task<string> UpdateUserClaim(UpdateUserClaimsRequest request);
+        public Task<ManageUserClaimsResult> ManageUserClaimData(User user);
 
     }
 }

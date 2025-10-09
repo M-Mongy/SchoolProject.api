@@ -39,7 +39,7 @@ namespace SchoolProject.api.Controllers
             var response = await Mediator.Send(new GetRolesListQuery());
             return NewResult(response);
         }
-        [HttpPost(Router.AuthorizationRouting.RoleById)]
+        [HttpPost(Router.AuthorizationRouting.GetRoleById)]
         public async Task<IActionResult> RoleById([FromRoute] int id)
         {
             var response = await Mediator.Send(new GetByIdQuery(id));
@@ -55,6 +55,19 @@ namespace SchoolProject.api.Controllers
         [SwaggerOperation(Summary = " تعديل صلاحيات المستخدمين", OperationId = "UpdateUserRoles")]
         [HttpPut(Router.AuthorizationRouting.UpdateUserRoles)]
         public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRoleCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
+        [HttpGet(Router.AuthorizationRouting.ManageUserClaims)]
+        public async Task<IActionResult> ManageUserClaims([FromRoute] int userId)
+        {
+            var response = await Mediator.Send(new ManageUserClaimQuery() { UserId = userId });
+            return NewResult(response);
+        }
+        [SwaggerOperation(Summary = " تعديل صلاحيات  الاستخدام المستخدمين", OperationId = "UpdateUserClaims")]
+        [HttpPut(Router.AuthorizationRouting.UpdateUserClaims)]
+        public async Task<IActionResult> UpdateUserClaims([FromBody] UpdateUserClaimsCommand command)
         {
             var response = await Mediator.Send(command);
             return NewResult(response);

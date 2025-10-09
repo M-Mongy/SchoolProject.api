@@ -37,6 +37,9 @@ namespace SchoolProject.Core.SharedResources
         public const string FailedToRemoveOldRoles = "Failed To Remove Old Roles";
         public const string FailedToAddNewRoles = "Failed To Add New Roles";
         public const string FailedToUpdateUserRoles = "Failed To Update User Roles";
+        public const string FailedToRemoveOldClaims = "Failed To Remove Old Claims";
+        public const string FailedToAddNewClaims = "Failed To Add New Claims";
+        public const string FailedToUpdateClaims = "Failed To Update Claims";
 
 
     }

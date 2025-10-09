@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolProject.Data.Helper
+namespace SchoolProject.Data.Results
 {
     public class JWTAuthResponse
     {

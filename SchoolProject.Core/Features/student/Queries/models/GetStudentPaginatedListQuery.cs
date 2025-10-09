@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using SchoolProject.Core.Features.student.Queries.Results;
 using SchoolProject.Core.Wrappers;
-using SchoolProject.Data.Helper;
+using SchoolProject.Data.Enums;
 
 namespace SchoolProject.Core.Features.student.Queries.models
 {

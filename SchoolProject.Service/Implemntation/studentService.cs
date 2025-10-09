@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
-using SchoolProject.Data.Helper;
+using SchoolProject.Data.Enums;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Infrastructure.Repositories;
 using SchoolProject.Service.Absract;

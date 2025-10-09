@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SchoolProject.Data.Entities.Identity;
-using SchoolProject.Data.Helper;
+using SchoolProject.Data.Results;
 
 namespace SchoolProject.Service.Absract
 {

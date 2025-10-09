@@ -4,13 +4,14 @@ using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helper;
 using SchoolProject.Data.Helpers;
+using SchoolProject.Data.Results;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Service.Absract;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using static SchoolProject.Data.Helper.JWTAuthResponse;
+using static SchoolProject.Data.Results.JWTAuthResponse;
 namespace SchoolProject.Service.Implementations
 {
     public class AuthenticationService : IAuthenticationsService

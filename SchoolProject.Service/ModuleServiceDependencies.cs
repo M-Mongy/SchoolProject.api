@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.DependencyInjection;
-using SchoolProject.Data.Helper;
+using SchoolProject.Data.Results;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Infrastructure.Repositories;
 using SchoolProject.Service.Absract;

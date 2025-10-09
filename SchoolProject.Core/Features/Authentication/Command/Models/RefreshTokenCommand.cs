@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using SchoolProject.Core.bases;
-using SchoolProject.Data.Helper;
+using SchoolProject.Data.Results;
 
 namespace SchoolProject.Core.Features.Authentication.Command.Models
 {

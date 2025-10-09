@@ -13,8 +13,8 @@ using SchoolProject.Core.Features.Authorization.Commands.Models;
 using SchoolProject.Core.Features.Authorization.Queries.Models;
 using SchoolProject.Core.Features.Authorization.Queries.Result;
 using SchoolProject.Core.SharedResources;
-using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Results;
 using SchoolProject.Service.Absract;
 using SchoolProject.Service.Implemntation;
 
@@ -63,7 +63,7 @@ namespace SchoolProject.Core.Features.Authorization.Queries.Handler
         {
             var user = await _userManager.FindByIdAsync(request.UserId.ToString());
             if (user == null) return NotFound<ManageUserRolesResult>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
-            var result = await _authorizationService.GetManageUserRolesData(user);
+            var result = await _authorizationService.ManageUserRolesData(user);
             return Success(result);
         }
     }
