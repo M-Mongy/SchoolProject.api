@@ -22,11 +22,11 @@ namespace SchoolProject.Core.Features.student.Commands.validatiors
         public AddStudentValidator(IstudentService service, IDepartmentService departmentService,
             IStringLocalizer<SharedResource> localizer)
         {
-            ApplyValidationsRules();
-            ApplyCustomValidationsRules();
             _service = service;
             _departmentService = departmentService;
             _localizer = localizer;
+            ApplyValidationsRules();
+            ApplyCustomValidationsRules();
         }
 
         #region Actions

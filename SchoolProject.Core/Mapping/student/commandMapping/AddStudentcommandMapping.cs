@@ -13,8 +13,8 @@ namespace SchoolProject.Core.Features.Mapping.student
         public void GetStudentListMapping() {
             CreateMap<AddStudentCommand, Student>()
                 .ForMember(dest => dest.DID, opt => opt.MapFrom(src => src.Department_id))
-                .ForMember(dest => dest.NameAr, opt => opt.MapFrom(src => src.Department_id))
-                .ForMember(dest => dest.NameEn, opt => opt.MapFrom(src => src.Department_id));
+                .ForMember(dest => dest.NameAr, opt => opt.MapFrom(src => src.NameAr))
+                .ForMember(dest => dest.NameEn, opt => opt.MapFrom(src => src.NameEn));
 
         }
     }

@@ -39,7 +39,7 @@ namespace SchoolProject.api.Controllers
             var response = await _mediator.Send(new GetStudentByIdQuery(id));
             return Ok(response);
         }
-
+        [Authorize(Policy= "CreateStudent")]
         [HttpPost(Router.StudentRouting.Create)]
         public async Task<IActionResult> Create([FromBody] AddStudentCommand command)
 
