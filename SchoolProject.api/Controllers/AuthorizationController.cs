@@ -6,6 +6,7 @@ using SchoolProject.Core.Features.ApplicationUser.Commands.Models;
 using SchoolProject.Core.Features.Authorization.Commands.Models;
 using SchoolProject.Core.Features.Authorization.Queries.Models;
 using SchoolProject.Data.AppMetaData;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace SchoolProject.api.Controllers
 {
@@ -42,6 +43,13 @@ namespace SchoolProject.api.Controllers
         public async Task<IActionResult> RoleById([FromRoute] int id)
         {
             var response = await Mediator.Send(new GetByIdQuery(id));
+            return NewResult(response);
+        }
+        
+        [HttpGet(Router.AuthorizationRouting.ManageUserRoles)]
+        public async Task<IActionResult> ManageUserRoles([FromRoute] int userId)
+        {
+            var response = await Mediator.Send(new ManageUserRolesQuery(userId));
             return NewResult(response);
         }
     }

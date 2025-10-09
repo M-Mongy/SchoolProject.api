@@ -17,6 +17,7 @@ namespace SchoolProject.Service.Absract
         public Task<string> EditRoleAsync(EditRoleRequest editRole);
         public Task<List<Role>> GetRoleslistAsync();
         public Task<Role> GetRoleByIdAsync(int id);
+        public Task<ManageUserRolesResult> GetManageUserRolesData(User user);
 
     }
 }

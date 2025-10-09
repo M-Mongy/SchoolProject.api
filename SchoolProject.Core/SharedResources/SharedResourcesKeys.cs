@@ -33,6 +33,7 @@ namespace SchoolProject.Core.SharedResources
         public const string PasswordOrUserNameNotCorrect = "Password or UserName Not Correct";
         public const string Used = " Role is Used";
         public const string RoleNotExist = "Role Not Exist";
+        public const string UserIsNotFound = "User Is NotFound";
 
 
     }
