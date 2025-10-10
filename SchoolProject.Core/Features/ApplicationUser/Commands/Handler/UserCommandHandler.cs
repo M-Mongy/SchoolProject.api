@@ -53,6 +53,7 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handler
                 return BadRequest<string>(createUser.Errors.FirstOrDefault().Description);
             }
             await _userManager.AddToRoleAsync(IdentityUser, "User");
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(IdentityUser);
       
             return Created("");
         }

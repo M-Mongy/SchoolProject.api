@@ -1,68 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.bases;
 using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.Authentication.Command.Models;
+using SchoolProject.Core.Features.Authentication.Commands.Models;
 using SchoolProject.Core.SharedResources;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Results;
 using SchoolProject.Service.Absract;
 
-namespace SchoolProject.Core.Features.Authentication.Command.Handler
+
+namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
 {
     public class AuthenticationCommandHandler : ResponseHandler,
         IRequestHandler<SignInCommand, Response<JWTAuthResponse>>,
-        IRequestHandler<RefreshTokenCommand, Response<JWTAuthResponse>>
+        IRequestHandler<RefreshTokenCommand, Response<JWTAuthResponse>>,
+        IRequestHandler<SendResetPasswordCommand, Response<string>>,
+        IRequestHandler<ResetPasswordCommand, Response<string>>
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signManager;
+
+
+        #region Fields
         private readonly IStringLocalizer<SharedResource> _stringLocalizer;
-        private readonly IAuthenticationsService _authenticationsService;
-        public AuthenticationCommandHandler(
-             IStringLocalizer<SharedResource> stringLocalizer
-            ,UserManager<User> userManager
-            ,SignInManager<User> SignManager
-            , IAuthenticationsService authenticationsService) : base(stringLocalizer)
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IAuthenticationsService _authenticationService;
+
+
+        #endregion
+
+        #region Constructors
+        public AuthenticationCommandHandler(IStringLocalizer<SharedResource> stringLocalizer,
+                                            UserManager<User> userManager,
+                                            SignInManager<User> signInManager,
+                                            IAuthenticationsService authenticationService) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _userManager = userManager;
-            _signManager = SignManager;
-            _authenticationsService = authenticationsService;
+            _signInManager = signInManager;
+            _authenticationService = authenticationService;
         }
 
+
+        #endregion
+
+        #region Handle Functions
         public async Task<Response<JWTAuthResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
+            //Check if user is exist or not
             var user = await _userManager.FindByNameAsync(request.UserName);
             //Return The UserName Not Found
-            if (user == null) return BadRequest<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
+            if (user == null) return BadRequest<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.UserNameIsNotExist]);
             //try To Sign in 
-            var signInResult = _signManager.CheckPasswordSignInAsync(user, request.Password, false);
+            var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             //if Failed Return Passord is wrong
-            if (!signInResult.IsCompletedSuccessfully) return BadRequest<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
-
+            if (!signInResult.Succeeded) return BadRequest<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordNotCorrect]);
+            //confirm email
+            if (!user.EmailConfirmed)
+                return BadRequest<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
             //Generate Token
-            var result = await _authenticationsService.GetJWTToken(user);
+            var result = await _authenticationService.GetJWTToken(user);
             //return Token 
             return Success(result);
         }
 
         public async Task<Response<JWTAuthResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
-            var jwtToken = _authenticationsService.ReadJWTToken(request.AccessToken);
-            var userIdAndExpireDate = await _authenticationsService.ValidateDetails(jwtToken, request.AccessToken, request.RefreshToken);
+            var jwtToken = _authenticationService.ReadJWTToken(request.AccessToken);
+            var userIdAndExpireDate = await _authenticationService.ValidateDetails(jwtToken, request.AccessToken, request.RefreshToken);
             switch (userIdAndExpireDate)
             {
-                case ("AlgorithmIsWrong", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
-                case ("TokenIsNotExpired", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
-                case ("RefreshTokenIsNotFound", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
-                case ("RefreshTokenIsExpired", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.PasswordOrUserNameNotCorrect]);
+                case ("AlgorithmIsWrong", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.AlgorithmIsWrong]);
+                case ("TokenIsNotExpired", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.TokenIsNotExpired]);
+                case ("RefreshTokenIsNotFound", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.RefreshTokenIsNotFound]);
+                case ("RefreshTokenIsExpired", null): return Unauthorized<JWTAuthResponse>(_stringLocalizer[SharedResourcesKeys.RefreshTokenIsExpired]);
             }
             var (userId, expiryDate) = userIdAndExpireDate;
             var user = await _userManager.FindByIdAsync(userId);
@@ -70,8 +82,35 @@ namespace SchoolProject.Core.Features.Authentication.Command.Handler
             {
                 return NotFound<JWTAuthResponse>();
             }
-            var result = await _authenticationsService.GetRefreshToken(user, jwtToken, expiryDate, request.RefreshToken);
+            var result = await _authenticationService.GetRefreshToken(user, jwtToken, expiryDate, request.RefreshToken);
             return Success(result);
         }
+
+        public async Task<Response<string>> Handle(SendResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.SendResetPasswordCode(request.Email);
+            switch (result)
+            {
+                case "UserNotFound": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
+                case "ErrorInUpdateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.TryAgainInAnotherTime]);
+                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.TryAgainInAnotherTime]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.TryAgainInAnotherTime]);
+            }
+        }
+
+        public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ResetPassword(request.Email, request.Password);
+            switch (result)
+            {
+                case "UserNotFound": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
+                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.InvaildCode]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.InvaildCode]);
+            }
+        }
+
+        #endregion
     }
 }

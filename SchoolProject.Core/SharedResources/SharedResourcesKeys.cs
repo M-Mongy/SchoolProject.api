@@ -41,6 +41,19 @@ namespace SchoolProject.Core.SharedResources
         public const string FailedToAddNewClaims = "Failed To Add New Claims";
         public const string FailedToUpdateClaims = "Failed To Update Claims";
         public const string SendEmailFailed = "Send Email Failed";
+        public const string UserNameIsNotExist = "UserName Is Not Exist";
+        public const string PasswordNotCorrect = "Password Not Correct";
+        public const string EmailNotConfirmed = "EmailNotConfirmed";
+        public const string TryToRegisterAgain = "TryToRegisterAgain";
+        public const string ErrorWhenConfirmEmail = "ErrorWhenConfirmEmail";
+        public const string ConfirmEmailDone = "ConfirmEmailDone";
+        public const string TryAgainInAnotherTime = "TryAgainInAnotherTime";
+        public const string InvaildCode = "InvaildCode";
+        public const string AlgorithmIsWrong = "AlgorithmIsWrong";
+        public const string TokenIsNotExpired = "TokenIsNotExpired";
+        public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
+        public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";       
+        public const string AddFailed = "AddFailed";
 
 
     }

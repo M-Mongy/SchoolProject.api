@@ -1,4 +1,6 @@
 ﻿using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using SchoolProject.Data.Results;
 using SchoolProject.Infrastructure.Abstract;
@@ -18,7 +20,10 @@ namespace SchoolProject.Service
             services.AddTransient<IAuthenticationsService, AuthenticationService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IEmailsService, EmailsService>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
             services.AddSingleton(new ConcurrentDictionary<string, JWTAuthResponse.RefreshToken>());
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
             return services;
         }
 

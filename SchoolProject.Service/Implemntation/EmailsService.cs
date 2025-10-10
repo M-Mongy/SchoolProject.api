@@ -18,7 +18,7 @@ namespace SchoolProject.Service.Implemntation
             _emailSettings = emailSettings;
         }
 
-        public async Task<string> SendEmail(string Email, string Message)
+        public async Task<string> SendEmail(string Email, string Message, string? reason)
         {
             try
             {

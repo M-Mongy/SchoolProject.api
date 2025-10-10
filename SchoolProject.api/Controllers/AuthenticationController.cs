@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.api.Base;
 using SchoolProject.Core.Features.Authentication.Command.Models;
+using SchoolProject.Core.Features.Authentication.Commands.Models;
 using SchoolProject.Core.Features.Authentication.Queries.Models;
 using SchoolProject.Core.Features.student.Commands.models;
 using SchoolProject.Data.AppMetaData;
@@ -23,12 +24,36 @@ namespace SchoolProject.api.Controllers
             var response = await Mediator.Send(command);
             return NewResult(response);
         }
-        [HttpGet(Router.ValidateTokenRouting.ValidateToken)]
+        [HttpGet(Router.AuthenticationRouting.ValidateToken)]
         public async Task<IActionResult> ValidateToken([FromQuery] AuthorizeUserQuery command)
         {
             var response = await Mediator.Send(command);
             return NewResult(response);
         }
+        [HttpGet(Router.AuthenticationRouting.ConfirmEmail)]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery query)
+        {
+            var response = await Mediator.Send(query);
+            return NewResult(response);
+        }
+        [HttpPost(Router.AuthenticationRouting.SendResetPasswordCode)]
+        public async Task<IActionResult> SendResetPassword([FromQuery] SendResetPasswordCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
+        [HttpGet(Router.AuthenticationRouting.ConfirmResetPasswordCode)]
+        public async Task<IActionResult> ConfirmResetPassword([FromQuery] ConfirmResetPasswordQuery query)
+        {
+            var response = await Mediator.Send(query);
+            return NewResult(response);
+        }
+        [HttpPost(Router.AuthenticationRouting.ResetPassword)]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
 
+        }
     }
 }

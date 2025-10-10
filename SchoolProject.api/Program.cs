@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Infrastructure.Seeder;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,6 +75,13 @@ builder.Services.AddCors(options =>
 });
 
 #endregion
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+builder.Services.AddTransient<IUrlHelper>(x =>
+{
+    var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+    var factory = x.GetRequiredService<IUrlHelperFactory>();
+    return factory.GetUrlHelper(actionContext);
+});
 
 var app = builder.Build();
 

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolProject.Data.Entities.Identity;
 
 namespace SchoolProject.Service.Absract
 {
-    public interface IEmailsService
+    public interface IApplicationUserService
     {
-        public Task<string> SendEmail(string email, string Message, string? reason);
+        public Task<string> AddUserAsync(User user, string password);
     }
 }
