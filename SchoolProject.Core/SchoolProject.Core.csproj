@@ -31,6 +31,7 @@
     <Folder Include="Features\Authentication\Command\Handler\" />
     <Folder Include="Features\Authentication\Command\Result\" />
     <Folder Include="Features\Department\Commands\" />
+    <Folder Include="Features\Emails\Queries\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
   </ItemGroup>
 

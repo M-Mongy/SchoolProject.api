@@ -40,6 +40,7 @@ namespace SchoolProject.Core.SharedResources
         public const string FailedToRemoveOldClaims = "Failed To Remove Old Claims";
         public const string FailedToAddNewClaims = "Failed To Add New Claims";
         public const string FailedToUpdateClaims = "Failed To Update Claims";
+        public const string SendEmailFailed = "Send Email Failed";
 
 
     }

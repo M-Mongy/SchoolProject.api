@@ -18,10 +18,10 @@ namespace SchoolProject.Data.AppMetaData
             public const string Prefix = Rule + "Student";
             public const string List = Prefix + "/List";
             public const string GetByID = Prefix + SignleRoute;
-            
+
             public const string Create = Prefix + "/Create";
             public const string Edit = Prefix + "/Edit";
-            
+
             public const string Delete = Prefix + SignleRoute;
             public const string Paginated = Prefix + "/Paginated";
         }
@@ -30,21 +30,21 @@ namespace SchoolProject.Data.AppMetaData
         {
             public const string Prefix = Rule + "Department";
             public const string GetByID = Prefix + SignleRoute;
-        }      
-        
+        }
+
         public static class ValidateTokenRouting
         {
             public const string Prefix = Rule + "ValidateToken";
             public const string ValidateToken = Prefix + SignleRoute;
         }
-        
+
         public static class AuthenticationRouting
         {
             public const string Prefix = Rule + "Authentication";
             public const string SignIn = Prefix + "/SignIn";
             public const string RefreshToken = Prefix + "/RefreshToken";
 
-        }    
+        }
         public static class AuthorizationRouting
         {
             public const string Prefix = Rule + "Authorization";
@@ -73,6 +73,11 @@ namespace SchoolProject.Data.AppMetaData
             public const string Delete = Prefix + SignleRoute;
             public const string ChangePassword = Prefix + "/Change-Password";
 
+        }
+        public static class EmailsRouting
+        {
+            public const string Prefix = Rule + "User";
+            public const string SendEmail = Prefix + "/SendEmail";
         }
     }
 }
