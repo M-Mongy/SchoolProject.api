@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Data.Entities.Views;
 using SchoolProject.Infrastructure.Abstract;
+using SchoolProject.Infrustructure.Abstracts.Procedures;
 using SchoolProject.Infrustructure.Abstracts.Views;
 using SchoolProject.Infrustructure.Repositories.Views;
 using SchoolProject.Service.Absract;
@@ -17,11 +19,15 @@ namespace SchoolProject.Service.Implemntation
     {
         private readonly IDepartmentRepository _DepartmentRepository;
         private readonly IViewRepository<ViewDepartment> _viewDepartmentRepository;
+        private readonly IDepartmentStudentCountProcRepository _departmentStudentCountProcRepository;
+
         public DepartmentService(IDepartmentRepository DepartmentRepository,
-            IViewRepository<ViewDepartment> viewDepartmentRepository)
+            IViewRepository<ViewDepartment> viewDepartmentRepository,
+            IDepartmentStudentCountProcRepository departmentStudentCountProcRepository)
         {
             _DepartmentRepository = DepartmentRepository;
             _viewDepartmentRepository = viewDepartmentRepository;
+            _departmentStudentCountProcRepository = departmentStudentCountProcRepository;
         }
 
         public Task<Department> GetDepartmentById(int id)
@@ -32,6 +38,11 @@ namespace SchoolProject.Service.Implemntation
                 .Include(x => x.Instructors)
                 .Include(x => x.Students).FirstOrDefaultAsync();
             return department;
+        }
+
+        public async Task<IReadOnlyList<DepartmentStudentCountProc>> GetDepartmentStudentCountProcs(DepartmentStudentCountProcParameters parameters)
+        {
+            return await _departmentStudentCountProcRepository.GetDepartmentStudentCountProcs(parameters);
         }
 
         public async Task<List<ViewDepartment>> GetViewDepartmentDataAsync()
