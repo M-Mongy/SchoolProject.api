@@ -30,6 +30,8 @@ namespace SchoolProject.Data.AppMetaData
         {
             public const string Prefix = Rule + "Department";
             public const string GetByID = Prefix + SignleRoute;
+            public const string GetDepartmentStudentsCount = Prefix + "/DepartmentStudentsCount";
+
         }
 
         public static class ValidateTokenRouting

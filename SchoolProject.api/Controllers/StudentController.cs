@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolProject.api.Base;
 using SchoolProject.Core.Features.student.Commands.models;
 using SchoolProject.Core.Features.student.Queries.models;
+using SchoolProject.Core.Filters;
 using SchoolProject.Data.AppMetaData;
 using SchoolProject.Data.Entities;
 
@@ -22,6 +23,8 @@ namespace SchoolProject.api.Controllers
         }
 
         [HttpGet(Router.StudentRouting.List)]
+        [Authorize(Roles = "User")]
+        [ServiceFilter(typeof(AuthFilter))]
         public async Task<IActionResult> GetStudentList()
         {
             var response = await _mediator.Send(new GetStudentListQuery());

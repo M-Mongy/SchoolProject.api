@@ -5,7 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using SchoolProject.Data.Results;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Infrastructure.Repositories;
+using SchoolProject.Infrustructure.Abstracts.Views;
 using SchoolProject.Service.Absract;
+using SchoolProject.Service.AuthServices.Implementations;
+using SchoolProject.Service.AuthServices.Interfaces;
 using SchoolProject.Service.Implementations;
 using SchoolProject.Service.Implemntation;
 
@@ -24,6 +27,7 @@ namespace SchoolProject.Service
             services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
             services.AddSingleton(new ConcurrentDictionary<string, JWTAuthResponse.RefreshToken>());
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            services.AddTransient<ICurrentUserService, CurrentUserService>();
             return services;
         }
 

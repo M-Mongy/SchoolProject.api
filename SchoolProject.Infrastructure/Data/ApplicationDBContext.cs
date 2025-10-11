@@ -13,6 +13,7 @@ using SchoolProject.Data.Entities;
 using SchoolProject.Data.Entities.Identity;
 using EntityFrameworkCore.EncryptColumn.Extension;
 using EntityFrameworkCore.EncryptColumn.Util;
+using SchoolProject.Data.Entities.Views;
 
 namespace SchoolProject.Infrastructure.Data
 {
@@ -39,6 +40,9 @@ namespace SchoolProject.Infrastructure.Data
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Ins_Subject> Ins_Subjects { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+
+        //Views 
+        public DbSet<ViewDepartment> ViewDepartment { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
