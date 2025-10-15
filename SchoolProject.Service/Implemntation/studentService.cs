@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
 using SchoolProject.Data.Enums;
 using SchoolProject.Infrastructure.Abstract;
-using SchoolProject.Infrastructure.Repositories;
 using SchoolProject.Service.Absract;
+using Serilog;
 
 namespace SchoolProject.Service.Implemntation
 {
@@ -38,8 +38,10 @@ namespace SchoolProject.Service.Implemntation
             await trans.CommitAsync();
             return "Deleted Successfully ";
             }
-            catch { 
+            catch (Exception ex)
+            { 
             await trans.RollbackAsync();
+                Log.Error(ex.Message);
                 return "failed";
             }
         }

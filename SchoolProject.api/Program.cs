@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core.Filters;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,7 +84,11 @@ builder.Services.AddTransient<IUrlHelper>(x =>
     var factory = x.GetRequiredService<IUrlHelperFactory>();
     return factory.GetUrlHelper(actionContext);
 });
+
 builder.Services.AddTransient<AuthFilter>();
+Log.Logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Services.AddSerilog();
 
 var app = builder.Build();
 

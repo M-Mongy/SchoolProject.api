@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using SchoolProject.Core.bases;
 using System.ComponentModel.DataAnnotations;
+using Serilog;
 
 namespace SchoolProject.Core.MiddleWare
 {
@@ -34,6 +35,7 @@ namespace SchoolProject.Core.MiddleWare
                 response.ContentType = "application/json";
                 var responseModel = new Response<string>() { Succeeded = false, Message = error?.Message };
                 //TODO:: cover all validation errors
+                Log.Error(error, error.Message, context.Request, "");
                 switch (error)
                 {
                     case UnauthorizedAccessException e:
