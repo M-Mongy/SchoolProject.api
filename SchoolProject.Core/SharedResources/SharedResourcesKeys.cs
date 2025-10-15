@@ -54,6 +54,10 @@ namespace SchoolProject.Core.SharedResources
         public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
         public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";       
         public const string AddFailed = "AddFailed";
+        public const string IsNotExist = "Is Not Exist";
+        public const string NoImage = "No Image";
+        public const string FailedToUploadImage = "Failed To Upload Image";
+
 
 
     }

@@ -32,7 +32,9 @@
     <Folder Include="Features\Authentication\Command\Result\" />
     <Folder Include="Features\Department\Commands\" />
     <Folder Include="Features\Emails\Queries\" />
+    <Folder Include="Features\Instructor\Query\Validators\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
+    <Folder Include="Mapping\Instructors\Query\" />
   </ItemGroup>
 
 </Project>

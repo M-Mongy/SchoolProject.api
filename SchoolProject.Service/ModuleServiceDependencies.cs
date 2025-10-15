@@ -7,6 +7,7 @@ using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Infrastructure.Repositories;
 using SchoolProject.Infrustructure.Abstracts.Views;
 using SchoolProject.Service.Absract;
+using SchoolProject.Service.Abstracts;
 using SchoolProject.Service.AuthServices.Implementations;
 using SchoolProject.Service.AuthServices.Interfaces;
 using SchoolProject.Service.Implementations;
@@ -28,6 +29,8 @@ namespace SchoolProject.Service
             services.AddSingleton(new ConcurrentDictionary<string, JWTAuthResponse.RefreshToken>());
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
             services.AddTransient<ICurrentUserService, CurrentUserService>();
+            services.AddTransient<IInstructorService, InstructorService>();
+            services.AddTransient<IFileService, FileService>();
             return services;
         }
 
