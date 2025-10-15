@@ -12,7 +12,7 @@ namespace SchoolProject.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,User")]
     public class StudentController : AppControllerBase
     {
         private readonly IMediator _mediator;

@@ -13,7 +13,7 @@ namespace SchoolProject.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize(Roles = "Admin,User")]
     public class ApplicationUserController : AppControllerBase
     {
         [Authorize]

@@ -38,7 +38,8 @@ namespace SchoolProject.Service.Implementations
         #region Handle Functions
         public async Task<decimal> GetSalarySummationOfInstructor()
         {
-            return await _dbContext.Instructors.SumAsync(i => i.Salary) ?? 0;
+            return await _dbContext.Instructors
+            .SumAsync(i => i.Salary ?? 0);
         }
 
         public async Task<bool> IsNameArExist(string nameAr)

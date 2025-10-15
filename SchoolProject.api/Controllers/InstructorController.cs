@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.api.Base;
@@ -9,6 +10,7 @@ using SchoolProject.Data.AppMetaData;
 namespace SchoolProject.api.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class InstructorController : AppControllerBase
     {
         [HttpGet(Router.InstructorRouting.GetSalarySummationOfInstructor)]
