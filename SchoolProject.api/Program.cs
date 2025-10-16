@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core.Filters;
 using Serilog;
+using System.Threading.RateLimiting;
+using SchoolProject.Core.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +92,7 @@ Log.Logger = new LoggerConfiguration()
               .ReadFrom.Configuration(builder.Configuration).CreateLogger();
 builder.Services.AddSerilog();
 
+builder.Services.AddCustomRateLimiter();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -112,7 +115,7 @@ var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(options.Value);
 #endregion
 
-
+app.UseCustomRateLimiter();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
